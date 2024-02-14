@@ -1,8 +1,8 @@
-import { AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import axiosInstance from '../utils/axios';
 
-export const fetchQuestions = async (config: AxiosRequestConfig) => {
-  const headers = {
+export const fetchQuestions = async (config: AxiosRequestConfig): Promise<AxiosResponse> => {
+  const headers: AxiosRequestConfig['headers'] = {
     ...(config.headers || {}),
   }
   

@@ -2,10 +2,11 @@ import { registerCoreBlocks } from "@quillforms/react-renderer-utils";
 import React, { FC, useEffect, useState, useMemo } from "react";
 import { fetchQuestions } from "../fetch-api";
 import { Form } from "@quillforms/renderer-core";
+import { SubmissionDispatchers } from "@quillforms/renderer-core/build-types/types";
 
 registerCoreBlocks();
 
-const QuestionsForm: FC = (props: any) => {
+const QuestionsForm: FC = () => {
   const [questions, setQuestions] = useState<Array<any>>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
@@ -18,7 +19,7 @@ const QuestionsForm: FC = (props: any) => {
           url: '/questions',
           method: 'GET',
         });
-        setQuestions((prev) => [...response.data]);
+        setQuestions(() => [...response.data]);
       } catch (error) {
         setError(error);
       }
@@ -58,10 +59,10 @@ const QuestionsForm: FC = (props: any) => {
             progressBarBgColor: "#ccc"
           }
         }}
-        onSubmit={(data, { completeForm, setIsSubmitting }) => {
+        onSubmit={(data: Object, dispatchers: SubmissionDispatchers) => {
           setTimeout(() => {
-            setIsSubmitting(false);
-            completeForm();
+            dispatchers.setIsSubmitting(false);
+            dispatchers.completeForm();
           }, 500)
         }}
       />
