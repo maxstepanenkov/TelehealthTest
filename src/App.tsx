@@ -2,12 +2,15 @@ import "@quillforms/renderer-core/build-style/style.css";
 import { registerCoreBlocks } from "@quillforms/react-renderer-utils";
 import "./styles.css";
 import QuestionsForm from "./components/QuestionsForm";
+import Layout from "./layouts";
 
 registerCoreBlocks();
 
 const App = () => {
   return (
-    <QuestionsForm />
+    <Layout>
+      <QuestionsForm />
+    </Layout>
   );
 };
 
